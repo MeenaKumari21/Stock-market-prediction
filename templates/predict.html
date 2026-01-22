@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Predict</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Stock Prediction</h2>
+    <a href="{{ url_for('history') }}" style="display:block; margin-bottom:15px;">View Prediction History</a>
+    <form method="post" action="/predict">
+      <input type="text" name="company" placeholder="Company Symbol (e.g. AAPL)" required>
+      <label>Start Date:</label>
+      <input type="date" name="startDate" required>
+      <label>End Date:</label>
+      <input type="date" name="endDate" required>
+      <button type="submit">Predict</button>
+    </form>
+
+    {% if image %}
+      <h3>Prediction Result</h3>
+      <img src="{{ url_for('static', filename=image.split('static/')[-1]) }}" alt="Prediction Graph" style="width:100%; border:1px solid #ccc; margin-top:15px;">
+    {% endif %}
+  </div>
+</body>
+</html>

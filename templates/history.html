@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Prediction History</h2>
+        {% if predictions %}
+            <table border="1" cellpadding="10" cellspacing="0" style="width:100%; text-align:center;">
+                <tr>
+                    <th>ID</th>
+                    <th>Company</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Graph</th>
+                </tr>
+                {% for pred in predictions %}
+                <tr>
+                    <td>{{ pred.id }}</td>
+                    <td>{{ pred.company }}</td>
+                    <td>{{ pred.start_date }}</td>
+                    <td>{{ pred.end_date }}</td>
+                    <!-- Updated img tag to show each prediction's unique graph -->
+                    <td><img src="{{ url_for('static', filename=pred.graph_path.split('static/')[-1]) }}" style="width:200px;"></td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No predictions yet.</p>
+        {% endif %}
+        <br>
+        <a href="{{ url_for('predict') }}">Back to Predict</a>
+    </div>
+</body>
+</html>
